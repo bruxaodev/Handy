@@ -1,0 +1,17 @@
+name: "Build Linux .deb"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-deb:
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: "ubuntu-22.04"
+      target: "x86_64-unknown-linux-gnu"
+      build-args: "--bundles deb"
+      upload-artifacts: true
+      asset-prefix: "handy"
+    secrets: inherit
