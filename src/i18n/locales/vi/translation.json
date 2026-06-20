@@ -194,6 +194,10 @@
           "transcribe_with_post_process": {
             "name": "Phím tắt xử lý sau",
             "description": "Tùy chọn: Phím tắt chuyên dụng luôn áp dụng xử lý sau bằng AI cho bản chuyển đổi của bạn."
+          },
+          "cycle_post_process_prompt": {
+            "name": "Cycle Post-Processing Prompt",
+            "description": "Cycles to the next post-processing prompt. Useful for quickly switching prompts while you work."
           }
         },
         "errors": {
@@ -416,6 +420,10 @@
         "cancel": "Hủy",
         "selectToEdit": "Chọn một prompt ở trên để xem và chỉnh sửa chi tiết.",
         "createFirst": "Nhấn 'Tạo Prompt mới' ở trên để tạo prompt xử lý sau đầu tiên của bạn."
+      },
+      "cyclePrompt": {
+        "title": "Cycle Prompt Hotkey",
+        "description": "A dedicated hotkey that cycles to the next post-processing prompt."
       }
     },
     "history": {

@@ -264,6 +264,14 @@ async setPostProcessSelectedPrompt(id: string) : Promise<Result<null, string>> {
     else return { status: "error", error: e  as any };
 }
 },
+async cyclePostProcessPrompt() : Promise<Result<LLMPrompt | null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("cycle_post_process_prompt", {}) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async updateCustomWords(words: string[]) : Promise<Result<null, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("update_custom_words", { words }) };

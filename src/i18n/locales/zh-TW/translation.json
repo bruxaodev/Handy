@@ -176,6 +176,10 @@
           "transcribe_with_post_process": {
             "name": "後處理快捷鍵",
             "description": "可選：專用快捷鍵，使用時一律對轉錄結果套用 AI 後處理"
+          },
+          "cycle_post_process_prompt": {
+            "name": "Cycle Post-Processing Prompt",
+            "description": "Cycles to the next post-processing prompt. Useful for quickly switching prompts while you work."
           }
         },
         "errors": {
@@ -416,6 +420,10 @@
         "cancel": "取消",
         "selectToEdit": "選擇上方的提示詞以檢視和編輯其詳細資訊",
         "createFirst": "點選上方的「建立新提示詞」來建立您的第一個後處理提示詞"
+      },
+      "cyclePrompt": {
+        "title": "Cycle Prompt Hotkey",
+        "description": "A dedicated hotkey that cycles to the next post-processing prompt."
       }
     },
     "history": {

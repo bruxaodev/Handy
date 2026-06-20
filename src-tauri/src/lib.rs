@@ -357,6 +357,7 @@ pub fn run(cli_args: CliArgs) {
             shortcut::update_post_process_prompt,
             shortcut::delete_post_process_prompt,
             shortcut::set_post_process_selected_prompt,
+            shortcut::cycle_post_process_prompt,
             shortcut::update_custom_words,
             shortcut::suspend_binding,
             shortcut::resume_binding,
@@ -485,6 +486,8 @@ pub fn run(cli_args: CliArgs) {
                 signal_handle::send_transcription_input(app, "transcribe", "CLI");
             } else if args.iter().any(|a| a == "--toggle-post-process") {
                 signal_handle::send_transcription_input(app, "transcribe_with_post_process", "CLI");
+            } else if args.iter().any(|a| a == "--cycle-post-process-prompt") {
+                shortcut::cycle_post_process_prompt_core(app);
             } else if args.iter().any(|a| a == "--cancel") {
                 crate::utils::cancel_current_operation(app);
             } else {

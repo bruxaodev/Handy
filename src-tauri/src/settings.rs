@@ -753,6 +753,25 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_post_process_shortcut.to_string(),
         },
     );
+    #[cfg(target_os = "windows")]
+    let default_cycle_prompt_shortcut = "ctrl+shift+p";
+    #[cfg(target_os = "macos")]
+    let default_cycle_prompt_shortcut = "option+shift+p";
+    #[cfg(target_os = "linux")]
+    let default_cycle_prompt_shortcut = "ctrl+shift+p";
+    #[cfg(not(any(target_os = "windows", target_os = "macos", target_os = "linux")))]
+    let default_cycle_prompt_shortcut = "alt+shift+p";
+
+    bindings.insert(
+        "cycle_post_process_prompt".to_string(),
+        ShortcutBinding {
+            id: "cycle_post_process_prompt".to_string(),
+            name: "Cycle Post-Processing Prompt".to_string(),
+            description: "Cycles to the next post-processing prompt.".to_string(),
+            default_binding: default_cycle_prompt_shortcut.to_string(),
+            current_binding: default_cycle_prompt_shortcut.to_string(),
+        },
+    );
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {

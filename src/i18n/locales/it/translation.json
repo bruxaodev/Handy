@@ -194,6 +194,10 @@
           "transcribe_with_post_process": {
             "name": "Tasto di post-elaborazione",
             "description": "Facoltativo: Un tasto di scelta rapida dedicato che applica sempre la post-elaborazione IA alla trascrizione."
+          },
+          "cycle_post_process_prompt": {
+            "name": "Cycle Post-Processing Prompt",
+            "description": "Cycles to the next post-processing prompt. Useful for quickly switching prompts while you work."
           }
         },
         "errors": {
@@ -416,6 +420,10 @@
         "cancel": "Annulla",
         "selectToEdit": "Scegli un prompt qui sopra per visualizzare o modificare i dettagli.",
         "createFirst": "Clicca 'Crea un nuovo prompt' qui sopra per creare il tuo primo prompt di post-elaborazione."
+      },
+      "cyclePrompt": {
+        "title": "Cycle Prompt Hotkey",
+        "description": "A dedicated hotkey that cycles to the next post-processing prompt."
       }
     },
     "history": {

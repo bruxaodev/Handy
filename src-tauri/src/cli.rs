@@ -19,6 +19,10 @@ pub struct CliArgs {
     #[arg(long)]
     pub toggle_post_process: bool,
 
+    /// Cycle to the next post-processing prompt (sent to running instance)
+    #[arg(long)]
+    pub cycle_post_process_prompt: bool,
+
     /// Cancel the current operation (sent to running instance)
     #[arg(long)]
     pub cancel: bool,

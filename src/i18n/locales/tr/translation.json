@@ -194,6 +194,10 @@
           "transcribe_with_post_process": {
             "name": "Son İşlem Kısayolu",
             "description": "İsteğe bağlı: Transkripsiyonunuza her zaman AI son işleme uygulayan özel bir kısayol tuşu."
+          },
+          "cycle_post_process_prompt": {
+            "name": "Cycle Post-Processing Prompt",
+            "description": "Cycles to the next post-processing prompt. Useful for quickly switching prompts while you work."
           }
         },
         "errors": {
@@ -416,6 +420,10 @@
         "cancel": "İptal",
         "selectToEdit": "Ayrıntılarını görüntülemek ve düzenlemek için yukarıdan bir prompt seçin.",
         "createFirst": "İlk son işlem prompt'unuzu oluşturmak için yukarıdaki “Yeni Prompt Oluştur” seçeneğine tıklayın."
+      },
+      "cyclePrompt": {
+        "title": "Cycle Prompt Hotkey",
+        "description": "A dedicated hotkey that cycles to the next post-processing prompt."
       }
     },
     "history": {

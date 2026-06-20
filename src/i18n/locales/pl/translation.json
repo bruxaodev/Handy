@@ -194,6 +194,10 @@
           "transcribe_with_post_process": {
             "name": "Skrót postprocessingu",
             "description": "Opcjonalnie: Dedykowany skrót klawiszowy, który zawsze stosuje postprocessing AI do transkrypcji."
+          },
+          "cycle_post_process_prompt": {
+            "name": "Cycle Post-Processing Prompt",
+            "description": "Cycles to the next post-processing prompt. Useful for quickly switching prompts while you work."
           }
         },
         "errors": {
@@ -416,6 +420,10 @@
         "cancel": "Anuluj",
         "selectToEdit": "Wybierz prompt powyżej, aby zobaczyć i edytować jego szczegóły.",
         "createFirst": "Kliknij 'Utwórz nowy prompt' powyżej, aby utworzyć pierwszy prompt postprocessingu."
+      },
+      "cyclePrompt": {
+        "title": "Cycle Prompt Hotkey",
+        "description": "A dedicated hotkey that cycles to the next post-processing prompt."
       }
     },
     "history": {

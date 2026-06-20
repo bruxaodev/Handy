@@ -394,8 +394,11 @@ fn register_all_shortcuts_for_implementation(
             continue;
         }
 
-        // Skip post-processing shortcut when the feature is disabled
+        // Skip post-processing shortcuts when the feature is disabled
         if id == "transcribe_with_post_process" && !current_settings.post_process_enabled {
+            continue;
+        }
+        if id == "cycle_post_process_prompt" && !current_settings.post_process_enabled {
             continue;
         }
 
@@ -799,16 +802,14 @@ pub fn change_post_process_enabled_setting(app: AppHandle, enabled: bool) -> Res
     settings.post_process_enabled = enabled;
     settings::write_settings(&app, settings.clone());
 
-    // Register or unregister the post-processing shortcut
-    if let Some(binding) = settings
-        .bindings
-        .get("transcribe_with_post_process")
-        .cloned()
-    {
-        if enabled {
-            let _ = register_shortcut(&app, binding);
-        } else {
-            let _ = unregister_shortcut(&app, binding);
+    // Register or unregister the post-processing shortcuts
+    for shortcut_id in ["transcribe_with_post_process", "cycle_post_process_prompt"] {
+        if let Some(binding) = settings.bindings.get(shortcut_id).cloned() {
+            if enabled {
+                let _ = register_shortcut(&app, binding);
+            } else {
+                let _ = unregister_shortcut(&app, binding);
+            }
         }
     }
 
@@ -1040,6 +1041,53 @@ pub fn set_post_process_selected_prompt(app: AppHandle, id: String) -> Result<()
     settings.post_process_selected_prompt_id = Some(id);
     settings::write_settings(&app, settings);
     Ok(())
+}
+
+/// Cycle the selected post-processing prompt to the next one in the list.
+///
+/// This is the shared core logic used by both the Tauri command and the
+/// shortcut action. Returns the new selected prompt id (or `None` if there
+/// are no prompts).
+pub fn cycle_post_process_prompt_core(app: &AppHandle) -> Option<LLMPrompt> {
+    let mut settings = settings::get_settings(app);
+
+    if settings.post_process_prompts.is_empty() {
+        return None;
+    }
+
+    // Determine the index of the currently selected prompt.
+    let current_idx = settings
+        .post_process_selected_prompt_id
+        .as_ref()
+        .and_then(|id| {
+            settings
+                .post_process_prompts
+                .iter()
+                .position(|p| &p.id == id)
+        })
+        .map(|idx| idx as isize)
+        .unwrap_or(-1);
+
+    // Advance to the next prompt, wrapping around.
+    let next_idx = ((current_idx + 1) % settings.post_process_prompts.len() as isize) as usize;
+    let next_prompt = settings.post_process_prompts[next_idx].clone();
+
+    settings.post_process_selected_prompt_id = Some(next_prompt.id.clone());
+    settings::write_settings(app, settings);
+
+    // Notify the frontend so it can refresh the selected prompt UI.
+    let _ = app.emit(
+        "post-process-prompt-cycled",
+        serde_json::json!({ "id": next_prompt.id, "name": next_prompt.name }),
+    );
+
+    Some(next_prompt)
+}
+
+#[tauri::command]
+#[specta::specta]
+pub fn cycle_post_process_prompt(app: AppHandle) -> Result<Option<LLMPrompt>, String> {
+    Ok(cycle_post_process_prompt_core(&app))
 }
 
 #[tauri::command]

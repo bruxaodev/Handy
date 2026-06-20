@@ -591,6 +591,12 @@ export const useSettingsStore = create<SettingsStore>()(
       listen("model-state-changed", () => {
         get().refreshSettings();
       });
+
+      // Re-fetch settings when a post-processing prompt is cycled via the
+      // dedicated hotkey or CLI flag so the UI reflects the new selection.
+      listen("post-process-prompt-cycled", () => {
+        get().refreshSettings();
+      });
     },
   })),
 );

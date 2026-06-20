@@ -437,6 +437,14 @@ export const PostProcessingSettings: React.FC = () => {
         />
       </SettingsGroup>
 
+      <SettingsGroup title={t("settings.postProcessing.cyclePrompt.title")}>
+        <ShortcutInput
+          shortcutId="cycle_post_process_prompt"
+          descriptionMode="tooltip"
+          grouped={true}
+        />
+      </SettingsGroup>
+
       <SettingsGroup title={t("settings.postProcessing.api.title")}>
         <PostProcessingSettingsApi />
       </SettingsGroup>

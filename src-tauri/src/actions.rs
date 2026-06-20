@@ -696,6 +696,26 @@ impl ShortcutAction for TestAction {
     }
 }
 
+// Cycle Post-Processing Prompt Action
+struct CyclePostProcessPromptAction;
+
+impl ShortcutAction for CyclePostProcessPromptAction {
+    fn start(&self, app: &AppHandle, _binding_id: &str, _shortcut_str: &str) {
+        if let Some(prompt) = shortcut::cycle_post_process_prompt_core(app) {
+            debug!(
+                "Cycled post-processing prompt to '{}' ({})",
+                prompt.name, prompt.id
+            );
+        } else {
+            debug!("No post-processing prompts available to cycle");
+        }
+    }
+
+    fn stop(&self, _app: &AppHandle, _binding_id: &str, _shortcut_str: &str) {
+        // Nothing to do on stop for cycle
+    }
+}
+
 // Static Action Map
 pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::new(|| {
     let mut map = HashMap::new();
@@ -716,6 +736,10 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
     map.insert(
         "test".to_string(),
         Arc::new(TestAction) as Arc<dyn ShortcutAction>,
+    );
+    map.insert(
+        "cycle_post_process_prompt".to_string(),
+        Arc::new(CyclePostProcessPromptAction) as Arc<dyn ShortcutAction>,
     );
     map
 });

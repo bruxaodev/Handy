@@ -176,6 +176,10 @@
           "transcribe_with_post_process": {
             "name": "Гаряча клавіша постобробки",
             "description": "Необов'язково: Спеціальна гаряча клавіша, яка завжди застосовує AI-постобробку до вашої транскрипції."
+          },
+          "cycle_post_process_prompt": {
+            "name": "Cycle Post-Processing Prompt",
+            "description": "Cycles to the next post-processing prompt. Useful for quickly switching prompts while you work."
           }
         },
         "errors": {
@@ -416,6 +420,10 @@
         "cancel": "Скасувати",
         "selectToEdit": "Оберіть промпт вище для перегляду та редагування його деталей.",
         "createFirst": "Натисніть «Створити новий промпт» вище, щоб створити ваш перший промпт постобробки."
+      },
+      "cyclePrompt": {
+        "title": "Cycle Prompt Hotkey",
+        "description": "A dedicated hotkey that cycles to the next post-processing prompt."
       }
     },
     "history": {
